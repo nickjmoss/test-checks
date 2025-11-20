@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: fail
         run: |
-          echo "This PR is required. Please review and merge it."
+          echo "This PR is required Please review and merge it."
           exit 1
   required-pass:
     runs-on: ubuntu-latest
