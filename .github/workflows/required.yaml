@@ -1,4 +1,4 @@
-name: Required
+name: Combined
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
       - dismissed
 
 jobs:
-  required-pass:
+  combined:
     runs-on: ubuntu-latest
     steps:
       - name: pass

@@ -1,4 +1,4 @@
-name: Required
+name: Review
 
 on:
   pull_request_review:
@@ -8,7 +8,7 @@ on:
       - dismissed
 
 jobs:
-  required-pass:
+  review:
     runs-on: ubuntu-latest
     steps:
       - name: pass
