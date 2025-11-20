@@ -1,0 +1,17 @@
+name: Required
+
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - reopened
+
+jobs:
+  required-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pass
+        run: |
+          echo "This PR is required. Please review and merge it."
+          exit 1
