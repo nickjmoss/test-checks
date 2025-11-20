@@ -19,12 +19,12 @@ jobs:
       - name: pass
         run: |
           # If event is pull_request, fail
-          if [ "$github_event_name" == "pull_request" ]; then
+          if [ ${{ github.event_name }} == "pull_request" ]; then
             echo "This PR is required. Please review and merge it."
             exit 1
           fi
           # If event is pull_request_review, pass
-          if [ "$github_event_name" == "pull_request_review" ]; then
+          if [ ${{ github.event_name }} == "pull_request_review" ]; then
             echo "This PR is required. Please review and merge it."
             exit 0
           fi
