@@ -13,5 +13,13 @@ jobs:
     steps:
       - name: pass
         run: |
-          echo "This PR is required. Please review and merge it."
-          exit 1
+          # If review is approved, pass
+          if [ ${{ github.event.review.state }} == "approved" ]; then
+            echo "This PR is approved. Please merge it."
+            exit 0
+          fi
+          # If review is not approved, fail
+          if [ ${{ github.event.review.state }} != "approved" ]; then
+            echo "This PR is not approved. Please review and approve it."
+            exit 1
+          fi
