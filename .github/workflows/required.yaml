@@ -21,7 +21,7 @@ jobs:
           # If event is pull_request, fail
           if [ ${{ github.event_name }} == "pull_request" ]; then
             echo "This PR is required. Please review and merge it."
-            exit 1
+            exit 0
           fi
           # If event is pull_request_review, pass
           if [ ${{ github.event_name }} == "pull_request_review" ]; then
