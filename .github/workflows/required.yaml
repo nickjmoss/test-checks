@@ -13,19 +13,18 @@ on:
       - dismissed
 
 jobs:
-  required-fail:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: fail
-        run: |
-          echo "This PR is required Please review and merge it."
-          exit 1
   required-pass:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request_review'
     steps:
       - name: pass
         run: |
-          echo "This PR is required. Please review and merge it."
-          exit 0
+          # If event is pull_request, fail
+          if [ "$github_event_name" == "pull_request" ]; then
+            echo "This PR is required. Please review and merge it."
+            exit 1
+          fi
+          # If event is pull_request_review, pass
+          if [ "$github_event_name" == "pull_request_review" ]; then
+            echo "This PR is required. Please review and merge it."
+            exit 0
+          fi
