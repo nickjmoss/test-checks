@@ -11,8 +11,29 @@ on:
       - synchronize
 
 jobs:
+  quick-check:
+    if: github.event_name == 'pull_request' && github.event.action == 'synchronize'
+    name: Check Required Reviews
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+
+            const dismissed = reviews.filter(r => r.state === 'DISMISSED');
+            if (dismissed.length > 0) {
+              core.setFailed('❌ Reviews were dismissed. Please get re-approval.');
+            }
   on-review:
     name: Check Required Reviews
+    if: github.event_name == 'pull_request_review'
     permissions:
       contents: read
       pull-requests: write
