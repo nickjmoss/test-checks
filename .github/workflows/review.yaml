@@ -1,4 +1,4 @@
-name: Review
+name: Review Change
 
 on:
   pull_request_review:
