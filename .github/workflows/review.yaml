@@ -6,20 +6,11 @@ on:
       - submitted
       - edited
       - dismissed
+  pull_request:
+    types:
+      - synchronize
 
 jobs:
   review:
-    runs-on: ubuntu-latest
-    steps:
-      - name: pass
-        run: |
-          # If review is approved, pass
-          if [ ${{ github.event.review.state }} == "approved" ]; then
-            echo "This PR is approved. Please merge it."
-            exit 0
-          fi
-          # If review is not approved, fail
-          if [ ${{ github.event.review.state }} != "approved" ]; then
-            echo "This PR is not approved. Please review and approve it."
-            exit 1
-          fi
+    name: Check Required Reviews
+    uses: nickjmoss/.github/.github/workflows/on-review.yaml
