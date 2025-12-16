@@ -11,6 +11,16 @@ on:
       - synchronize
 
 jobs:
-  review:
+  on-review:
     name: Check Required Reviews
-    uses: nickjmoss/.github/.github/workflows/on-review.yaml
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+      statuses: write
+      security-events: write
+      id-token: write
+      actions: read
+      packages: read
+    secrets: inherit
+    uses: nickjmoss/.github/.github/workflows/on-review.yaml@main
